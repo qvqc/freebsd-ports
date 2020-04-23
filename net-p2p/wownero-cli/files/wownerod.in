@@ -1,0 +1,91 @@
+#!/bin/sh
+# $FreeBSD$
+
+# PROVIDE: wownerod
+# REQUIRE: LOGIN cleanvar
+# KEYWORD: shutdown
+
+# Add the following to %%LOCALBASE%%/etc/rc.conf.d/wownerod to influence
+# the behavior of this script (default values are listed):
+#
+# wownerod_enable="NO"  # change to "YES" to enable
+# wownerod_user="wownero"
+# wownerod_group="wownero"
+# wownerod_data_dir="/var/db/wownero"
+# wownerod_conf="%%PREFIX%%/etc/wownerod.conf"
+# wownerod_log="/var/log/wownero.log"
+# wownerod_bind_addr="0.0.0.0"
+# wownerod_bind_port="18080"
+# wownerod_mine_for=""    # Do mining for the given address (empty: no mining)
+# wownerod_mine_threads=""
+# wownerod_mine_max_cpu_pct=""
+# wownerod_extra_args=""  # See wownerod --help
+
+. /etc/rc.subr
+
+name="wownerod"
+rcvar=wownerod_enable
+
+load_rc_config ${name}
+
+: ${wownerod_enable:="NO"}
+: ${wownerod_user:="wownero"}
+: ${wownerod_group:="wownero"}
+: ${wownerod_data_dir:="/var/db/wownero"}
+: ${wownerod_conf:="%%PREFIX%%/etc/${name}.conf"}
+: ${wownerod_log:="/var/log/${name}.log"}
+: ${wownerod_bind_addr:="0.0.0.0"}
+: ${wownerod_bind_port:="18080"}
+
+start_precmd="wownerod_start_precmd"
+pidfile="/var/run/${name}.pid"
+command="%%PREFIX%%/bin/wownerod"
+command_args=""
+command_args="${command_args} --data-dir=${wownerod_data_dir}"
+command_args="${command_args} --detach"
+command_args="${command_args} --log-file=${wownerod_log}"
+command_args="${command_args} --non-interactive"
+command_args="${command_args} --p2p-bind-ip=${wownerod_bind_addr}"
+command_args="${command_args} --p2p-bind-port=${wownerod_bind_port}"
+command_args="${command_args} --pidfile=${pidfile}"
+
+if [ -e "${wownerod_conf}" ] ; then
+	command_args="${command_args} --config-file=${wownerod_conf}"
+fi
+
+if [ -n "${wownerod_mine_for}" ] ; then
+	a="--bg-mining-enable --start-mining=${wownerod_mine_for}"
+
+	if [ -n "${wownerod_mine_threads}" ] ; then
+		a="${a} --mining-threads=${wownerod_mine_threads}"
+	fi
+
+	if [ -n "${wownerod_mine_max_cpu_pct}" ] ; then
+		a="${a} --bg-mining-miner-target=${wownerod_mine_max_cpu_pct}"
+	fi
+
+	command_args="${command_args} ${a}"
+fi
+
+command_args="${command_args} ${wownerod_extra_args}"
+command_args="${command_args} >${wownerod_data_dir}/wownerod.stdout"
+command_args="${command_args} 2>${wownerod_data_dir}/wownerod.stderr"
+
+wownerod_start_precmd()
+{
+	if [ ! -e "${pidfile}" ]; then
+		install -o ${wownerod_user} -g ${wownerod_group} -m 644 /dev/null "${pidfile}"
+	fi
+
+	if [ ! -e "${wownerod_log}" ]; then
+		install -o ${wownerod_user} -g ${wownerod_group} -m 600 /dev/null "${wownerod_log}"
+	fi
+
+	if [ ! -d "${wownerod_data_dir}" ]; then
+		install -d -o ${wownerod_user} -g ${wownerod_group} -m 700 "${wownerod_data_dir}"
+	fi
+
+	cd "${wownerod_data_dir}"
+}
+
+run_rc_command "$1"
