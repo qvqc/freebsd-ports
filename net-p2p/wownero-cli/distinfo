@@ -1,0 +1,7 @@
+TIMESTAMP = 1589004408
+SHA256 (wownero-wownero-v0.7.0_GH0.tar.gz) = 09244f777d7bb1e9874c1a975303b14c6133ab252e17239a41a5fc815918eec6
+SIZE (wownero-wownero-v0.7.0_GH0.tar.gz) = 10155703
+SHA256 (wownero-RandomWOW-1.1.7-wow_GH0.tar.gz) = 00fda8be81e1ab4539f7d3e6bbaa4c04f608572eb98a17befe9a2ec17320b7f0
+SIZE (wownero-RandomWOW-1.1.7-wow_GH0.tar.gz) = 162807
+SHA256 (trezor-trezor-common-31a0073c62738_GH0.tar.gz) = bccc20a8aa11655ed4d19a52e15a9afb6349c9d286de8a120b4f56162286069f
+SIZE (trezor-trezor-common-31a0073c62738_GH0.tar.gz) = 1329164
