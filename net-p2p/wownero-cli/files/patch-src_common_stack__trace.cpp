@@ -1,4 +1,4 @@
---- src/common/stack_trace.cpp.orig	2019-11-04 14:13:39 UTC
+--- src/common/stack_trace.cpp.orig     2020-05-09 01:44:29 UTC
 +++ src/common/stack_trace.cpp
 @@ -26,13 +26,14 @@
  // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF

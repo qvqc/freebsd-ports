@@ -43,7 +43,7 @@ GIT_COMMIT=	${PKGNAMESUFFIX:C/-git-//}
 GIT_COMMIT=	${DISTVERSIONPREFIX}${PORTVERSION}
 .endif
 GH_TUPLE=	wownero:wownero:${GIT_COMMIT} \
-		wownero:RandomWOW:1.1.7-wow:ext1/external/randomwow \
+		wownero:RandomWOW:1.1.7-wow:ext1/external/RandomWOW \
 		trezor:trezor-common:31a0073c62738:ext2/external/trezor-common
 
 CFLAGS+=	-D_WANT_SEMUN
