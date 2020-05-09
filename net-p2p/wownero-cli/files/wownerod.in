@@ -35,7 +35,7 @@ load_rc_config ${name}
 : ${wownerod_conf:="%%PREFIX%%/etc/${name}.conf"}
 : ${wownerod_log:="/var/log/${name}.log"}
 : ${wownerod_bind_addr:="0.0.0.0"}
-: ${wownerod_bind_port:="18080"}
+: ${wownerod_bind_port:="34568"}
 
 start_precmd="wownerod_start_precmd"
 pidfile="/var/run/${name}.pid"
