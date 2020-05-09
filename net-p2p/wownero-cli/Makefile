@@ -10,7 +10,7 @@ DISTVERSIONPREFIX=	v
 #PKGNAMESUFFIX=	-git-HEAD
 CATEGORIES=	net-p2p finance
 
-MAINTAINER=	vd@FreeBSD.org
+MAINTAINER=	ridethe@candy.surf
 COMMENT=	Private, secure, untraceable, decentralised memecoin (CLI)
 
 LICENSE=	BSD3CLAUSE
