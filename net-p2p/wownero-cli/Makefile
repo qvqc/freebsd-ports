@@ -93,17 +93,6 @@ USERS=		wownero
 GROUPS=		wownero
 
 PLIST_FILES=	\
-		bin/wownero-blockchain-ancestry \
-		bin/wownero-blockchain-depth \
-		bin/wownero-blockchain-export \
-		bin/wownero-blockchain-import \
-		bin/wownero-blockchain-mark-spent-outputs \
-		bin/wownero-blockchain-prune \
-		bin/wownero-blockchain-prune-known-spent-data \
-		bin/wownero-blockchain-stats \
-		bin/wownero-blockchain-usage \
-		bin/wownero-gen-ssl-cert \
-		bin/wownero-gen-trusted-multisig \
 		bin/wownero-wallet-cli \
 		bin/wownero-wallet-rpc \
 		bin/wownerod
